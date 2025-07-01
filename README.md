@@ -1,34 +1,39 @@
 # Nirdosh_colour_Bot
-import logging
-from aiogram import Bot, Dispatcher, types, executor
+# 🤖 Tiranga Smart Prediction Bot
 
-API_TOKEN = '7982397493:AAG0R_bQhcAM5jr0iQqerBlD1tObqLjGIRQ'  # Replace with your token if needed
+This is a Telegram bot built using Python and Aiogram that predicts Tiranga game outcomes (Color, Number, Size) based on the last 4-digit input.
 
-logging.basicConfig(level=logging.INFO)
-bot = Bot(token=API_TOKEN)
-dp = Dispatcher(bot)
+---
 
-# 🔮 Simple prediction logic (placeholder – customize as needed)
-def predict_color(number: str):
-    num = int(number[-1])
-    color = "RED" if num % 3 == 0 else "GREEN" if num % 2 == 0 else "VIOLET"
-    size = "BIG" if num >= 5 else "SMALL"
-    return f"🎯 Prediction:\nColor: {color}\nNumber: {num}\nSize: {size}"
+## 🚀 Features
 
-@dp.message_handler(commands=['start'])
-async def start(message: types.Message):
-    await message.reply("👋 Welcome to Tiranga Smart Prediction Bot!\nUse /smart 1234 to get prediction.")
+- 🎯 Predicts **Color** (RED / GREEN / VIOLET)
+- 🔢 Gives **Last Digit** & classifies as **BIG / SMALL**
+- 💬 Telegram command: `/smart 1234`
+- 🔄 Works 24x7 on Render deployment
 
-@dp.message_handler(commands=['smart'])
-async def smart_predict(message: types.Message):
-    try:
-        input_number = message.text.split(" ")[1]
-        if not input_number.isdigit() or len(input_number) != 4:
-            raise ValueError
-        prediction = predict_color(input_number)
-        await message.reply(prediction)
-    except:
-        await message.reply("❗ Format error! Use like: /smart 1234")
+---
 
-if __name__ == '__main__':
-    executor.start_polling(dp, skip_updates=True) 
+## 🛠 Tech Stack
+
+- Python 3.11+
+- Aiogram (Telegram Bot Framework)
+- Render (Free Web Service Deployment)
+
+---
+
+## 🔧 Setup & Deployment (Render)
+
+1. **Clone this repo** or upload to GitHub.
+2. Create a **new Web Service** on [Render](https://render.com/)
+3. Use:
+   - Build Command: `pip install -r requirements.txt`
+   - Start Command: `python main.py`
+4. Set your `BOT_TOKEN` in environment or directly in `main.py`.
+
+---
+
+## 📎 Example Usage
+
+```bash
+/smart 2345
